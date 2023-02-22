@@ -1,5 +1,9 @@
+import markdown
+import datetime
 from django.shortcuts import render
-from .form import OurStoryForm
+from love_space.settings import BASE_DIR
+from love_record.models import User, OurStory, OurGallery
+
 
 # Create your views here.
 # TODO 首页，展示相识时间，在一起时间（两个时间的计时效果）
@@ -13,8 +17,21 @@ from .form import OurStoryForm
 
 
 def index(request):
-    if request.method == 'POST':
-        print(request.FILES)
-    else:
-        form = OurStoryForm()
-    return render(request, 'index.html', {'form': form})
+    # 定义遇见和在一起的时间
+    met_list = [2022, 10, 27, 19, 26]  # JavaScript 上面月份是 0 - 11
+    together_list = [2023, 1, 17, 20, 15]
+    # 定义相遇时间
+    met_time = datetime.datetime(2022, 11, 27, 19, 26)
+    boyfriend = User.objects.filter(tag=User.BOYFRIEND).first()
+    girlfriend = User.objects.filter(tag=User.GIRLFRIEND).first()
+    met_year = met_time.strftime("%Y")
+    met_month = met_time.strftime("%B")
+    met_weekday = met_time.strftime("%A")
+    met_day = met_time.strftime("%d")
+    # 我们的相遇
+    met_words = markdown.Markdown().convert(open(f'{BASE_DIR}/static/files/met_words.md').read())
+    # 我们的故事
+    stories = OurStory.objects.filter()[:4]
+    # 我们的相册
+    albums = OurGallery.objects.filter()[:8]
+    return render(request, 'index.html', locals())

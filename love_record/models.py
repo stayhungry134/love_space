@@ -12,15 +12,27 @@ class BaseModel(models.Model):
 
 
 class User(models.Model):
+    BOYFRIEND = 'boyfriend'
+    GIRLFRIEND = 'girlfriend'
+    OTHER = 'other'
+    TAG = [
+        (BOYFRIEND, '男朋友'),
+        (GIRLFRIEND, '女朋友'),
+        (OTHER, '其他'),
+    ]
     username = models.CharField(max_length=32, verbose_name='用户名')
     password = models.CharField(max_length=128, verbose_name='用户密码')
-    profile_img = models.ImageField(upload_to='user_img', blank=True, verbose_name='用户头像')
+    tag = models.CharField(max_length=16, choices=TAG, default=OTHER, verbose_name='用户标签')
+    profile_img = models.ImageField(upload_to='user_img/', blank=True, verbose_name='用户头像')
     qq_id = models.CharField(blank=True, null=True, max_length=10, verbose_name='用户QQ号')
     phone = models.CharField(blank=True, null=True, max_length=16, verbose_name='用户手机号')
     wechat = models.CharField(blank=True, null=True, max_length=32, verbose_name='用户微信')
     birthday = models.DateField(blank=True, null=True, verbose_name='用户生日')
     location = models.CharField(blank=True, null=True, max_length=256, verbose_name='用户地址')
     remark = models.TextField(blank=True, null=True, verbose_name='用户简介')
+
+    def __str__(self):
+        return self.username
 
     class Meta:
         db_table = 'user'
@@ -33,6 +45,9 @@ class ChatRecord(BaseModel):
     content = models.TextField(blank=True, null=True, verbose_name='聊天内容')
     chat_img = models.ImageField(upload_to='chat_image/%Y/%m', name='', verbose_name='聊天图片')
 
+    def __str__(self):
+        return self.sender + self.chat_time.isoformat()
+
     class Meta:
         db_table = 'chat_record'
         ordering = ['-id']
@@ -40,9 +55,17 @@ class ChatRecord(BaseModel):
 
 
 class OurStory(BaseModel):
+    story_title = models.TextField(max_length=128, verbose_name='故事标题')
     story_time = models.DateTimeField(db_index=True, verbose_name='故事时间')
     story_img = models.ImageField(upload_to='story_image/%Y/%m', verbose_name='事件封面')
     content = MDTextField()
+
+    def __str__(self):
+        return self.story_title
+
+    @property
+    def min_month(self):
+        return self.story_time.strftime("%b")
 
     class Meta:
         db_table = 'our_story'
@@ -52,6 +75,9 @@ class OurBlog(BaseModel):
     blog_time = models.DateTimeField(db_index=True, auto_now_add=True, verbose_name='blog 时间')
     blog_img = models.ImageField(upload_to='blog_image/%Y/%m', name='', verbose_name='blog 封面')
     content = MDTextField()
+
+    def __str__(self):
+        return f"Blog-{self.blog_time.date().isoformat()}"
 
     class Meta:
         db_table = 'out_blog'
@@ -63,6 +89,9 @@ class OurGallery(BaseModel):
     img = models.ImageField(upload_to='gallery/%Y/%m', name='', verbose_name='图片')
     img_info = models.TextField(blank=True, null=True, verbose_name='图片简介')
 
+    def __str__(self):
+        return f"img-{self.img_time.isoformat()}"
+
     class Meta:
         db_table = 'our_gallery'
         ordering = ['-id']
@@ -73,6 +102,9 @@ class LeaveBlessing(BaseModel):
     writer = models.CharField(max_length=32, verbose_name='留言者')
     qq_id = models.CharField(max_length=10, blank=True, null=True, verbose_name='留言者QQ号码')
     email = models.EmailField(max_length=64, blank=True, null=True, verbose_name='用户邮箱')
+
+    def __str__(self):
+        return f"Img-{self.blessing_time.isoformat()}"
 
     class Meta:
         db_table = 'blessing'

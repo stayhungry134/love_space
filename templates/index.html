@@ -1,16 +1,422 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <form action="" method="post">
-        {% csrf_token %}
-        {{ form.media }}
-        {{ form.as_div }}
-        <p><input type="submit" value="post"></p>
-    </form>
-</body>
-</html>
+
+{% block stylesheet %}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock %}
+
+{% block main %}
+    <!-- Timing -->
+    <div class="timing">
+        <div class="container-fluid row justify-content-around">
+            <div class="col-lg-5 time-down">
+                <div class="time-title text-center">
+                    <h2 class="time-header">We Met Each Other</h2>
+                </div>
+                <div class="timing-container met-time">
+                    <div class="container-segment years" style="display: none">
+                        <div class="segment-title">Years</div>
+                        <div class="segment">
+                            <div class="flip-card" data-years-tens>
+                                <div class="top">0</div>
+                                <div class="bottom">0</div>
+                            </div>
+                            <div class="flip-card" data-years-ones>
+                                <div class="top">0</div>
+                                <div class="bottom">0</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-segment days">
+                        <div class="segment-title">Days</div>
+                        <div class="segment">
+                            <div class="flip-card" data-days-tens>
+                                <div class="top">0</div>
+                                <div class="bottom">0</div>
+                            </div>
+                            <div class="flip-card" data-days-ones>
+                                <div class="top">0</div>
+                                <div class="bottom">0</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-segment hours">
+                        <div class="segment-title">Hours</div>
+                        <div class="segment">
+                            <div class="flip-card" data-hours-tens>
+                                <div class="top">0</div>
+                                <div class="bottom">0</div>
+                            </div>
+                            <div class="flip-card" data-hours-ones>
+                                <div class="top">0</div>
+                                <div class="bottom">0</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-segment minutes">
+                        <div class="segment-title">Minutes</div>
+                        <div class="segment">
+                            <div class="flip-card" data-minutes-tens>
+                                <div class="top">0</div>
+                                <div class="bottom">0</div>
+                            </div>
+                            <div class="flip-card" data-minutes-ones>
+                                <div class="top">0</div>
+                                <div class="bottom">0</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-segment seconds">
+                        <div class="segment-title">Seconds</div>
+                        <div class="segment">
+                            <div class="flip-card" data-seconds-tens>
+                                <div class="top">0</div>
+                                <div class="bottom">0</div>
+                            </div>
+                            <div class="flip-card" data-seconds-ones>
+                                <div class="top">0</div>
+                                <div class="bottom">0</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5 time-down">
+                <div class="time-title text-center">
+                    <h2 class="time-header">We Are Together</h2>
+                </div>
+                <div class="timing-container together-time">
+                    <div class="container-segment years" style="display: none">
+                        <div class="segment-title">Years</div>
+                        <div class="segment">
+                            <div class="flip-card" data-years-tens>
+                                <div class="top">0</div>
+                                <div class="bottom">0</div>
+                            </div>
+                            <div class="flip-card" data-years-ones>
+                                <div class="top">0</div>
+                                <div class="bottom">0</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-segment days">
+                        <div class="segment-title">Days</div>
+                        <div class="segment">
+                            <div class="flip-card" data-days-tens>
+                                <div class="top">0</div>
+                                <div class="bottom">0</div>
+                            </div>
+                            <div class="flip-card" data-days-ones>
+                                <div class="top">0</div>
+                                <div class="bottom">0</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-segment hours">
+                        <div class="segment-title">Hours</div>
+                        <div class="segment">
+                            <div class="flip-card" data-hours-tens>
+                                <div class="top">0</div>
+                                <div class="bottom">0</div>
+                            </div>
+                            <div class="flip-card" data-hours-ones>
+                                <div class="top">0</div>
+                                <div class="bottom">0</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-segment minutes">
+                        <div class="segment-title">Minutes</div>
+                        <div class="segment">
+                            <div class="flip-card" data-minutes-tens>
+                                <div class="top">0</div>
+                                <div class="bottom">0</div>
+                            </div>
+                            <div class="flip-card" data-minutes-ones>
+                                <div class="top">0</div>
+                                <div class="bottom">0</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-segment seconds">
+                        <div class="segment-title">Seconds</div>
+                        <div class="segment">
+                            <div class="flip-card" data-seconds-tens>
+                                <div class="top">0</div>
+                                <div class="bottom">0</div>
+                            </div>
+                            <div class="flip-card" data-seconds-ones>
+                                <div class="top">0</div>
+                                <div class="bottom">0</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="about-us clearfix container row justify-content-center">
+            <div class="col-lg-5 col-md-10 about-us-block">
+                <div class="text-center">
+                    <h2>{{ boyfriend.username }}</h2>
+                </div>
+
+                <div class="person-info clearfix">
+                    <img class="col-md-6 float-end mb-3 ms-md-3" src="{{boyfriend.profile_img.url}}" alt="">
+                    <p>{{ boyfriend.remark }}</p>
+                </div>
+            </div>
+            <div class="heart col-lg-2 col-md-12 text-center">
+                <img src="{% static 'images/heart_img.png' %}" alt="">
+            </div>
+            <div class="col-lg-5 col-md-10 about-us-block">
+                <div class="text-center">
+                    <h2>{{ girlfriend.username }}</h2>
+{#                    <p>Morrys</p>#}
+                </div>
+                <div class="person-info clearfix">
+                    <img class="col-md-6 float-start me-3 mb-3" src="{{ girlfriend.profile_img.url}}" alt="">
+                    <p>{{ girlfriend.remark }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Our Day -->
+    <div id="our-day" class="our-day container-lg row">
+        <div class="col-md-8 offset-md-2 text-center">
+            <div class="section-title">
+                <h2>{{ met_weekday }}, {{ met_day }} <span class="main-color">{{ met_month }}</span> {{ met_year }}</h2>
+            </div>
+            <!-- Counter -->
+            <div id="count" class="count">
+                <!-- You can edit HTML code of this block in the js/main.js -->
+            </div>
+            <!-- Counter -->
+
+            <div class="description">{{ met_words | safe }}</div>
+        </div>
+    </div>
+
+    <!-- Our Story -->
+    <div id="our-story" class="our-story container-lg row">
+        <div class="section-title">
+            <h2>Our Story</h2>
+        </div>
+        {% for story in stories %}
+            {% if forloop.counter|divisibleby:"2" %}
+                <div class="col-md-10 story row">
+                    <div class="col-sm-12 col-md-5 story-image text-center">
+                        <img src="{{ story.story_img.url }}" alt="故事图片">
+                    </div>
+                    <div class="col-sm-12 col-md-2 text-center story-middle">
+                        <div class="story-date">
+                            <div class="year">{{ story.story_time.year }}</div>
+                            <div class="month">{{ story.min_month }}</div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-5 story-info flex-column justify-content-center">
+                        <h3>{{ story.story_title }}</h3>
+                        <p>{{ story.content|truncatechars:150}}</p>
+                    </div>
+                    <div class="vertical-line"></div>
+                </div>
+            {% else %}
+                <div class="col-md-10 story row">
+                    <div class="col-sm-12 col-md-5 story-info flex-column justify-content-center">
+                        <h3>{{ story.story_title }}</h3>
+                        <p>{{ story.content|truncatechars:150}}</p>
+                    </div>
+                    <div class="col-sm-12 col-md-2 text-center story-middle">
+                        <div class="story-date">
+                            <div class="year">{{ story.story_time.year }}</div>
+                            <div class="month">{{ story.min_month }}</div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-5 story-image text-center">
+                        <img src="{{ story.story_img.url }}" alt="故事图片">
+                    </div>
+                    <div class="vertical-line"></div>
+                </div>
+            {% endif %}
+        {% endfor %}
+
+    </div>
+
+    <!-- Gallery -->
+    <div id="our-gallery" class="gallery container-fluid row">
+        <div class="section-title text-center">
+            <h2>Gallery</h2>
+        </div>
+
+        {% for album in albums %}
+            <div class="gallery-image col-lg-3 col-md-4 col-sm-6">
+                <div class="item-caption"></div>
+                <img src="{{ album.img.url }}" alt="{{ album.img_info }}">
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- RSVP Section -->
+    <div id="rsvp" class="rsvp container">
+        <h2 class="section-title text-center">RSVP</h2>
+
+        <div class="row">
+            <!-- RSVP Form -->
+            <form id="rsvp-form" class="col-lg-8 col-md-10 col-sm-12 rsvp-form" method="post" action="" novalidate>
+                <div class="mb-3">
+                    <label class="form-label">你的名字</label>
+                    <input type="text" class="form-control" name="name" placeholder="名字或昵称">
+                    <div class="form-text">你也可以在这里写下你的网名</div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">你的联系方式</label>
+                    <input type="text" class="form-control" name="phone" placeholder="请填写电话号码">
+                    <div class="form-text">我们将为你保密，你也可以选择不填</div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">留言内容</label>
+                    <textarea class="form-control" rows="5" placeholder="请输入留言内容"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary float-end">Submit</button>
+            </form>
+            <!-- /RSVP Form -->
+        </div>
+    </div>
+{% endblock %}
+
+{% block jsfile %}
+<script>
+    const met_time = new Date(...{{ met_list }});
+    const together_time = new Date(...{{ together_list }});
+    let flags = {
+        met_hundred: 0,
+        met_years: 0,
+        together_hundred: 0,
+        together_years: 0,
+    }
+
+    function insert_hundred(days){
+        let days_hundreds = days.cloneNode(true)
+        days_hundreds.removeAttribute('data-days-tens');
+        days_hundreds.setAttribute('data-days-hundreds', null)
+        days_hundreds.childNodes
+
+        days_hundreds.setAttribute('class', 'flip-card')
+        days_hundreds.setAttribute('data-days-hundreds', null)
+
+        days.parentNode.insertBefore(days_hundreds, days_tens)
+    }
+    flags = new Proxy(flags, {
+            set(target, p, value, receiver) {
+                target[p] = value;
+                // 如果设置的是天数(几百天)
+                if (p === 'met_hundred' && flags[p] > 0) {
+                    let days_tens = document.querySelector('.met-time .days [data-days-tens]');
+                    insert_hundred(days_tens)
+                }
+                // 如果设置的是几年
+                if (p === 'met_years' && flags[p] > 0) {
+                    let years_ele = document.querySelector(".met-time .years")
+                    years_ele.setAttribute('style', 'display: flex')
+                    flip(document.querySelector('[data-years-tens]'), Math.floor(flags['years'] / 10))
+                    flip(document.querySelector('[data-years-ones]'), Math.floor(flags['years'] % 10))
+                }
+                // 如果设置的是天数(几百天)
+                if (p === 'together_hundred' && flags[p] > 0) {
+                    let days_tens = document.querySelector('.together-time .days [data-days-tens]');
+                    insert_hundred(days_tens)
+                }
+                // 如果设置的是几年
+                if (p === 'together_years' && flags[p] > 0) {
+                    let years_ele = document.querySelector(".together-time .years")
+                    years_ele.setAttribute('style', 'display: flex')
+                    flip(document.querySelector('[data-years-tens]'), Math.floor(flags['years'] / 10))
+                    flip(document.querySelector('[data-years-ones]'), Math.floor(flags['years'] % 10))
+                }
+            }
+
+        })
+    setInterval(() => {
+            const currentDate = new Date()
+            // 如果日期超过 1 年
+            let met_years = currentDate.getFullYear() - met_time.getFullYear()
+            let tmp_met_date = currentDate.setFullYear(met_time.getFullYear()) - met_time
+            if (tmp_met_date < 0){
+                currentDate.setFullYear(met_time.getFullYear() + 1)
+                met_years = met_years - 1;
+            }
+            if (met_years) flags['met_years'] = met_years
+            const between_met_time = Math.ceil((currentDate - met_time) / 1000)
+            flipAllCards('met-time', between_met_time)
+            // 如果日期超过 1 年
+            let together_years = currentDate.getFullYear() - together_time.getFullYear()
+            let tmp_together_date = currentDate.setFullYear(together_time.getFullYear()) - together_time
+            if (tmp_together_date < 0){
+                currentDate.setFullYear(together_time.getFullYear() + 1)
+                together_years = together_years - 1;
+            }
+            if (together_years) flags['together_years'] = together_years
+            const between_together_time = Math.ceil((currentDate - together_time) / 1000)
+            flipAllCards('together-time', between_together_time)
+        }, 500)
+
+    function flipAllCards(selector, time) {
+            const seconds = time % 60
+            const minutes = Math.floor(time / 60) % 60
+            const hours = Math.floor(time / 3600) % 24
+            const days = Math.floor(time / (3600 * 24))
+            const hundred = Math.floor(days / 100)
+            // 如果天数超过 100 天
+            if (days > 100 && selector === 'met-time' && hundred - flags['met_hundred']) {
+                flags['met_hundred'] = hundred;
+            }
+
+            if (days > 100 && selector === 'together' && hundred - flags['met_hundred']) {
+                flags['met_hundred'] = hundred;
+            }
+
+
+            flip(selector, document.querySelector(`.${selector} [data-days-hundreds]`), Math.floor(days / 100))
+            flip(selector, document.querySelector(`.${selector} [data-days-tens]`), Math.floor(days / 10 % 10 ))
+            flip(selector, document.querySelector(`.${selector} [data-days-ones]`), days %  10)
+            flip(selector, document.querySelector(`.${selector} [data-hours-tens]`), Math.floor(hours / 10))
+            flip(selector, document.querySelector(`.${selector} [data-hours-ones]`), hours % 10)
+            flip(selector, document.querySelector(`.${selector} [data-minutes-tens]`), Math.floor(minutes / 10))
+            flip(selector, document.querySelector(`.${selector} [data-minutes-ones]`), minutes % 10)
+            flip(selector, document.querySelector(`.${selector} [data-seconds-tens]`), Math.floor(seconds / 10))
+            flip(selector, document.querySelector(`.${selector} [data-seconds-ones]`), seconds % 10)
+        }
+
+    function flip(selector, flipCard, newNumber) {
+            if (flipCard) {
+                const topHalf = flipCard.querySelector(`.${selector} .top`)
+                const startNumber = parseInt(topHalf.textContent)
+                if (newNumber === startNumber) return
+
+                const bottomHalf = flipCard.querySelector(`.${selector} .bottom`)
+                const topFlip = document.createElement('div')
+                topFlip.classList.add('top-flip')
+                const bottomFlip = document.createElement('div')
+                bottomFlip.classList.add('bottom-flip')
+
+                // top.textContent = startNumber
+                bottomHalf.textContent = startNumber
+                topFlip.textContent = startNumber
+                bottomFlip.textContent = newNumber
+
+                topFlip.addEventListener('animationstart', e => {
+                    topHalf.textContent = newNumber
+                })
+                topFlip.addEventListener('animationend', e => {
+                    topFlip.remove()
+                })
+                bottomFlip.addEventListener('animationend', e => {
+                    bottomHalf.textContent = newNumber
+                    bottomFlip.remove()
+                })
+                flipCard.append(topFlip, bottomFlip)
+            }
+        }
+</script>
+{% endblock %}

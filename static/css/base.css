@@ -1,0 +1,110 @@
+@font-face {
+  font-family: "Courgette";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../fonts/wEO_EBrAnc9BLjLQAUk1WPoK7Es.woff2") format("woff2");
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: "Courgette";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../fonts/wEO_EBrAnc9BLjLQAUk1VvoK.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../fonts/Roboto-Italic.ttf");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+span.main-color {
+  color: #ff8578;
+}
+
+*, *::after, *::before {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: roboto, Helvetica, sans-serif;
+  color: #666;
+  margin: 0;
+  height: 100%;
+  font-size: 100%;
+  line-height: 1.5em;
+}
+
+.header {
+  background-color: white;
+  position: fixed;
+  display: flex;
+  top: 0;
+  vertical-align: center;
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+  z-index: 100;
+}
+.header .logo-container {
+  float: left;
+}
+.header .logo-container .header-logo {
+  margin: 0;
+  padding: 0;
+  color: #353535;
+  font-size: 27px;
+  font-family: courgette, Helvetica, sans-serif;
+}
+.header .header-date {
+  float: right;
+}
+.header .header-date p {
+  padding: 0;
+  font-size: 18px;
+  font-family: Roboto, sans-serif;
+  color: #9c9c9c;
+  font-weight: 300;
+}
+
+.main-nav {
+  position: fixed;
+  width: 100%;
+  top: 60px;
+  height: 50px;
+  background-color: #ff8578;
+  z-index: 100;
+  padding: 0;
+  box-sizing: border-box;
+}
+.main-nav ul li {
+  height: 50px;
+}
+.main-nav ul li a {
+  font-size: 18px;
+  padding: 0 20px;
+  line-height: 50px;
+  height: 50px;
+  color: white;
+  font-weight: 500;
+}
+.main-nav a:visited {
+  color: white;
+}
+.main-nav a:hover {
+  color: #ff8578;
+  background-color: white;
+}
+
+@media all and (max-width: 1000px) {
+  .header {
+    background-color: #93bfcf;
+  }
+  .header .header-date p {
+    color: #fdfdfd;
+  }
+}
+
+/*# sourceMappingURL=base.css.map */
