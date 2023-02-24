@@ -1,0 +1,8 @@
+{#{% extends 'love_record/base.html' %}#}
+{% load static %}
+<form action="" method="post">
+    {% csrf_token %}
+    {{ story_form.story_time }}
+    {{ story_form.content }}
+    <input type="submit" value="Submit">
+</form>

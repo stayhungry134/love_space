@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'love_record/base.html' %}
 {% load static %}
 
 {% block stylesheet %}
@@ -206,41 +206,49 @@
         {% for story in stories %}
             {% if forloop.counter|divisibleby:"2" %}
                 <div class="col-md-10 story row">
-                    <div class="col-sm-12 col-md-5 story-image text-center">
-                        <img src="{{ story.story_img.url }}" alt="故事图片">
+                    <div class="col-sm-12 col-md-5 story-info flex-column justify-content-center card">
+                        <div class="card-body">
+                            <h3 class="card-title">{{ story.story_title }}</h3>
+                            <p class="card-text">{{ story.content|truncatechars:150}}</p>
+                            <a class="btn btn-info text-white float-end">查看详情</a>
+                        </div>
                     </div>
                     <div class="col-sm-12 col-md-2 text-center story-middle">
                         <div class="story-date">
                             <div class="year">{{ story.story_time.year }}</div>
-                            <div class="month">{{ story.min_month }}</div>
+                            <div class="month">{{ story.story_time|date:'M' }}</div>
                         </div>
                     </div>
-                    <div class="col-sm-12 col-md-5 story-info flex-column justify-content-center">
-                        <h3>{{ story.story_title }}</h3>
-                        <p>{{ story.content|truncatechars:150}}</p>
+                    <div class="col-sm-12 col-md-5 story-image text-center">
+                        <img src="{{ story.story_img.url }}" alt="故事图片">
                     </div>
                     <div class="vertical-line"></div>
                 </div>
             {% else %}
                 <div class="col-md-10 story row">
-                    <div class="col-sm-12 col-md-5 story-info flex-column justify-content-center">
-                        <h3>{{ story.story_title }}</h3>
-                        <p>{{ story.content|truncatechars:150}}</p>
+                    <div class="col-sm-12 col-md-5 story-image text-center">
+                        <img src="{{ story.story_img.url }}" alt="故事图片">
                     </div>
                     <div class="col-sm-12 col-md-2 text-center story-middle">
                         <div class="story-date">
                             <div class="year">{{ story.story_time.year }}</div>
-                            <div class="month">{{ story.min_month }}</div>
+                            <div class="month">{{ story.story_time | date:'M'}}</div>
                         </div>
                     </div>
-                    <div class="col-sm-12 col-md-5 story-image text-center">
-                        <img src="{{ story.story_img.url }}" alt="故事图片">
+                    <div class="col-sm-12 col-md-5 story-info flex-column justify-content-center card">
+                        <div class="card-body">
+                            <h3 class="card-title">{{ story.story_title }}</h3>
+                            <p class="card-text">{{ story.content|truncatechars:150}}</p>
+                            <a class="btn btn-info text-white float-end">查看详情</a>
+                        </div>
                     </div>
                     <div class="vertical-line"></div>
                 </div>
             {% endif %}
         {% endfor %}
-
+        <div class="see-more col-12 text-center">
+            <a class="btn btn-info col-lg-4 col-md-6 text-white col-sm-8" href="">查看更多</a>
+        </div>
     </div>
 
     <!-- Gallery -->
@@ -255,6 +263,10 @@
                 <img src="{{ album.img.url }}" alt="{{ album.img_info }}">
             </div>
         {% endfor %}
+
+        <div class="see-more col-12 text-center">
+            <a class="btn btn-info col-lg-4 col-md-6 text-white col-sm-8" href="">查看更多</a>
+        </div>
     </div>
 
     <!-- RSVP Section -->

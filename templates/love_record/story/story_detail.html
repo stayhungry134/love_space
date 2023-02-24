@@ -1,0 +1,38 @@
+{% extends 'love_record/base.html' %}
+{% load static %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" href="{% static 'css/story_detail.css' %}">
+{% endblock %}
+
+{% block main %}
+    <div class="story-card">
+        <div class="detail-img">
+            <img src="{{ story.story_img.url}}" alt="">
+        </div>
+        <div class="container row card-nav story-nav">
+        <div class="card col-lg-2 d-none d-lg-flex">
+            <div class="card-header">
+                {{ story.story_title }}
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">在中间在中间在中间</li>
+                <li class="list-group-item">在中间在中间在中间</li>
+                <li class="list-group-item">在中间</li>
+                <li class="list-group-item">在中间</li>
+            </ul>
+        </div>
+        <div class="card col-lg-8 offset-lg-1">
+            <div class="card-header text-center">
+                <h2 class="card-title">{{ story.story_title }}</h2>
+            </div>
+            <div class="card-body">
+                {{ story_content|safe }}
+            </div>
+            <div class="card-footer text-end text-muted">
+                {{ story.story_time|date:"Y年m月d日" }}
+            </div>
+        </div>
+    </div>
+    </div>
+{% endblock %}

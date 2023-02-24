@@ -1,0 +1,41 @@
+.container{
+  margin-top: 60px;
+}
+.story-title{
+  margin: 30px auto;
+  font-family: "Source Code Pro", sans-serif;
+}
+.stories{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  .card{
+    width: 30%;
+    margin: 30px auto;
+    .card-img-top{
+      width: 100%;
+      height: 250px;
+    }
+    .card-footer{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+}
+@media all and (max-width: 1000px){
+  .stories{
+    .card{
+      width: 45%;
+      margin: 30px auto;
+    }
+  }
+}
+@media screen and (max-width: 768px){
+  .stories{
+    .card{
+      width: 90%;
+      margin: 20px auto;
+    }
+  }
+}

@@ -1,0 +1,89 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="https://at.alicdn.com/t/c/font_3912375_om12gf7z9kr.css">
+    {% block stylesheet %} {% endblock %}
+    <script src="{% static 'js/header.js' %}" defer></script>
+</head>
+<body>
+    <!--Header-->
+    <header class="header">
+        <div class="container">
+            <div class="logo-container">
+                <div class="header-logo">zh <span class="main-color">&amp;</span> mxh</div>
+            </div>
+
+            <div class="header-date d-none d-md-block">
+                <p>Sunday, 27 <span class="main-color"> November </span> 2022 </p>
+            </div>
+            <div class="menu-toggle d-md-none d-sm-block float-end clearfix">
+                <i class="iconfont icon-shouqicaidan text-white"></i>
+            </div>
+        </div>
+    </header>
+    <!--Header-->
+
+    <!-- Site Navigation -->
+    <nav class="mobile-nav d-md-none container-fluid d-sm-block position-fixed"
+         style="left: 100vw;">
+        <div class="row">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <a href="{% url 'love_record:index' %}">Home</a>
+                </li>
+                <li class="list-group-item">
+                    <a href="{% url 'love_record:our_story' %}">Our Day</a>
+                </li>
+                <li class="list-group-item">
+                    <a href="{% url 'love_record:our_story' %}">Our Story</a>
+                </li>
+                <li class="list-group-item">
+                    <a href="#our-gallery">Gallery</a>
+                </li>
+                <li class="list-group-item">
+                    <a href="#events">Wedding Events</a>
+                </li>
+                <li class="list-group-item">
+                    <a href="#rsvp">RSVP</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <nav class="navbar main-nav d-none d-md-flex">
+        <div class="container">
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'love_record:index' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'love_record:our_story' %}">Our Day</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'love_record:our_story' %}">Our Story</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#our-gallery">Gallery</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#events">Wedding Events</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#rsvp">RSVP</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+{% block main %} {% endblock %}
+{% block jsfile %} {% endblock %}
+</body>
+</html>

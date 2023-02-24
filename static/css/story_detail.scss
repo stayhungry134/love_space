@@ -1,0 +1,50 @@
+.detail-img {
+  width: 100%;
+  height: 100%;
+  img{
+    width: 100%;
+    object-fit: cover;
+  }
+}
+.card-nav{
+  .list-group-item{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+    .card-header{
+      font-size: 1.2em;
+    }
+}
+@media all and (min-width: 1000px) {
+  .detail-img{
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: fixed;
+    img{
+      width: 100%;
+      height: 100%;
+      opacity: .8;
+      object-fit: cover;
+    }
+  }
+  .detail-img::after{
+    content: "";
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-image: linear-gradient(rgba(255,255,255,0) 20%, rgba(255,255,255,1) 80%);
+    z-index: 1;
+  }
+}
+.container{
+  margin: 50px auto 0;
+  .card{
+    padding: 0;
+  }
+}

@@ -1,0 +1,29 @@
+{% extends 'love_record/base.html' %}
+{% load static %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" href="{% static 'css/story.css' %}">
+{% endblock %}
+
+{% block main %}
+<div class="our-stories container">
+    <div class="story-title text-center">
+        <h1>Our Story</h1>
+    </div>
+    <div class="stories">
+        {% for story in stories %}
+            <div class="card">
+                <img class="card-img-top" src="{{ story.story_img.url }}" alt="">
+                <div class="card-body">
+                    <h3 class="card-title">{{ story.story_title }}</h3>
+                    <div class="class-text">{{ story.content|truncatechars:100 }}</div>
+                </div>
+                <div class="card-footer">
+                    <div class="text-muted">{{ story.story_time|date:"Y年m月d日" }}</div>
+                    <a class="btn btn-info text-white" href="{% url 'love_record:story_detail' story.id %}">查看详情</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
