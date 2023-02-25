@@ -1,0 +1,55 @@
+.our-stories {
+  margin-top: 150px;
+}
+
+.story-title {
+  margin: 30px auto;
+  font-family: courgette, Helvetica, sans-serif;
+}
+
+.stories {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.stories .card {
+  width: 30%;
+  margin: 30px auto;
+}
+.stories .card .card-img-top {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+}
+.stories .card .card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media all and (max-width: 1000px) {
+  .our-stories {
+    margin-top: 80px;
+  }
+  .story-title {
+    margin: 0 auto;
+  }
+  .stories .card {
+    width: 45%;
+    margin: 30px auto;
+  }
+  .stories .card .card-img-top {
+    height: 220px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .stories .card {
+    width: 90%;
+    margin: 20px auto;
+  }
+  .stories .card .card-img-top {
+    height: 200px;
+  }
+}
+
+/*# sourceMappingURL=story.css.map */

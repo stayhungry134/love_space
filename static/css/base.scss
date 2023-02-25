@@ -69,6 +69,9 @@ body {
       font-weight: 300;
     }
   }
+  .menu-toggle i{
+    font-size: 30px;
+  }
 }
 
 .main-nav {
@@ -99,6 +102,30 @@ body {
     background-color: white;
   }
 }
+
+.mobile-nav{
+  background-color: rgb(147, 191, 207, .95);
+  position: fixed;
+  top: 60px;
+  width: 100vw;
+  height: 100vh;
+  z-index: 3;
+  transition: .5s;
+  .list-group-item{
+    background-color: rgb(147, 191, 207, .95);
+    height: 8vh;
+    width: 100%;
+    padding: 0;
+
+    a{
+      text-decoration: none;
+      color: white;
+      padding: 0 10vw;
+      font-size: 20px;
+      line-height: 8vh;
+    }
+  }
+}
 @media all and (max-width: 1000px) {
   .header{
     background-color: #93bfcf;
@@ -106,5 +133,4 @@ body {
       color: #fdfdfd;
     }
   }
-
 }

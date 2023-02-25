@@ -68,6 +68,9 @@ body {
   color: #9c9c9c;
   font-weight: 300;
 }
+.header .menu-toggle i {
+  font-size: 30px;
+}
 
 .main-nav {
   position: fixed;
@@ -96,6 +99,29 @@ body {
 .main-nav a:hover {
   color: #ff8578;
   background-color: white;
+}
+
+.mobile-nav {
+  background-color: rgba(147, 191, 207, 0.95);
+  position: fixed;
+  top: 60px;
+  width: 100vw;
+  height: 100vh;
+  z-index: 3;
+  transition: 0.5s;
+}
+.mobile-nav .list-group-item {
+  background-color: rgba(147, 191, 207, 0.95);
+  height: 8vh;
+  width: 100%;
+  padding: 0;
+}
+.mobile-nav .list-group-item a {
+  text-decoration: none;
+  color: white;
+  padding: 0 10vw;
+  font-size: 20px;
+  line-height: 8vh;
 }
 
 @media all and (max-width: 1000px) {

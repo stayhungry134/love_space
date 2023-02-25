@@ -55,17 +55,13 @@ class ChatRecord(BaseModel):
 
 
 class OurStory(BaseModel):
-    story_title = models.TextField(max_length=128, verbose_name='故事标题')
+    story_title = models.CharField(max_length=128, verbose_name='故事标题')
     story_time = models.DateTimeField(db_index=True, verbose_name='故事时间')
-    story_img = models.ImageField(upload_to='story_image/%Y/%m', verbose_name='事件封面')
+    story_img = models.ImageField(upload_to='story_image/%Y/%m', verbose_name='故事图片')
     content = MDTextField()
 
     def __str__(self):
         return self.story_title
-
-    @property
-    def min_month(self):
-        return self.story_time.strftime("%b")
 
     class Meta:
         db_table = 'our_story'

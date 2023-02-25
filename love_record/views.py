@@ -1,12 +1,12 @@
 import markdown
 import datetime
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from love_space.settings import BASE_DIR
 from love_record.models import User, OurStory, OurGallery
+from love_record.form import OurStoryForm
 
 
 # Create your views here.
-# TODO 首页，展示相识时间，在一起时间（两个时间的计时效果）
 # TODO Our Story 我们的故事，用时间线，故事内容，图片来展示（markdown）
 # TODO Our Blog 我们的博客，主要用于记录一些东西
 # TODO Gallery 用于上传我们的相册
@@ -17,6 +17,7 @@ from love_record.models import User, OurStory, OurGallery
 
 
 def index(request):
+    """主页"""
     # 定义遇见和在一起的时间
     met_list = [2022, 10, 27, 19, 26]  # JavaScript 上面月份是 0 - 11
     together_list = [2023, 1, 17, 20, 15]
@@ -34,4 +35,26 @@ def index(request):
     stories = OurStory.objects.filter()[:4]
     # 我们的相册
     albums = OurGallery.objects.filter()[:8]
-    return render(request, 'index.html', locals())
+    return render(request, 'love_record/index.html', locals())
+
+
+def our_story(request):
+    """查看我们的故事"""
+    stories = OurStory.objects.filter(visible=True)
+    return render(request, 'love_record/story/our_story.html', locals())
+
+
+def story_detail(request, story_id: int):
+    """故事详情"""
+    story = get_object_or_404(OurStory, id=story_id)
+    story_content = markdown.Markdown().convert(story.content)
+    return render(request, 'love_record/story/story_detail.html', locals())
+
+
+def add_edit_story(request, story_id):
+    """添加或编辑故事"""
+    if request.method == 'POST':
+        print('-------------------------')
+        print(request.POST)
+    story_form = OurStoryForm
+    return render(request, 'love_record/story/story_form.html', locals())
