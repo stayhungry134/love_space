@@ -1,8 +1,95 @@
-{#{% extends 'love_record/base.html' %}#}
+{% extends 'love_record/base.html' %}
 {% load static %}
-<form action="" method="post">
-    {% csrf_token %}
-    {{ story_form.story_time }}
-    {{ story_form.content }}
-    <input type="submit" value="Submit">
-</form>
+{% block stylesheet %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap/fileinput.css' %}">
+    <link rel="stylesheet" href="{% static 'css/story/story_form.css' %}">
+{% endblock %}
+
+{% block main %}
+<div class="container story_form">
+    <form class="row" action="" method="post" enctype="multipart/form-data"> <!--form这里一定要有 enctype="multipart/form-data" ，否则无法上传图片-->
+        {% csrf_token %}
+        <div class="basic col-lg-6 offset-lg-3">
+            <div class="m-3">
+                <input class="form-check-input" name="visible" type="checkbox" {% if story.visible %}checked{% endif %}  value="true" id="public">
+                <label class="form-check-label" for="public">
+                    是否公开
+                </label>
+            </div>
+            <div class="input-group mb-3 story-title">
+                <span class="input-group-text">故事标题</span>
+                <input type="text" name="story_title" value="{{ story.story_title }}" maxlength="128" required class="form-control ps-4" placeholder="故事标题">
+            </div>
+            <div class="input-group mb-3 story-time">
+                <span class="input-group-text">故事时间</span>
+                <input type="datetime-local" name="story_time" value="{{ story.story_time }}" required min="2022-11-27T19:26" max="{{ max_time|date:'Y-m-d\T23:59' }}" class="form-control ps-4">
+            </div>
+            <div class="input-group mb-3">
+                <input type="file" value="{{ story.story_img }}" name="story_img" id="story-img" required class="form-control">
+            </div>
+        </div>
+        <div class="content mb-5">
+            {{ story_form.media }}
+            {{ story_form.as_div }}
+        </div>
+        <div>
+            <input type="submit" class="btn btn-info float-end px-4 text-white mb-3">
+        </div>
+    </form>
+</div>
+
+{% endblock %}
+
+
+{% block jsfile %}
+    <script src="{% static 'js/jQuery.js' %}"></script>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    <script src="{% static 'js/fileinput.js' %}"></script>
+    <script>
+    // 图上传与预览相关控制
+    $('#story-img').fileinput
+    (
+        {
+            showUpload : false, //是否显示上传按钮,跟随文本框的那个
+
+            showRemove : false, //显示移除按钮,跟随文本框的那个
+
+            showCaption : true,//是否显示标题,就是那个文本框
+
+            showPreview : true, //是否显示预览,不写默认为true
+
+            dropZoneEnabled : false,//是否显示拖拽区域，默认不写为true，但是会占用很大区域
+
+            //minImageWidth: 50, //图片的最小宽度
+
+            //minImageHeight: 50,//图片的最小高度
+
+            //maxImageWidth: 1000,//图片的最大宽度
+
+            //maxImageHeight: 1000,//图片的最大高度
+
+            //maxFileSize: 0, //文件最大大小，单位为kb，如果为0表示不限制文件大小
+
+            //minFileCount: 0, //文件最小大小， 单位为kb，如果为0表示不限制文件大小
+
+            maxFileCount : 1, //表示允许同时上传的最大文件个数
+
+            enctype : 'multipart/form-data',
+
+            validateInitialCount : true,
+
+            allowedFileTypes : [ 'image' ],//配置允许文件上传的类型
+
+            allowedPreviewTypes : [ 'image' ],//配置所有的被预览文件类型
+
+            allowedPreviewMimeTypes : [ 'jpg', 'png', 'gif' ],//控制被预览的所有mime类型
+
+            language : 'zh'
+        }
+    )
+
+    // 控制生成的代码的样式
+    $('input.file-caption-name').attr('placeholder', '点击按钮选择故事图片');
+    $('span.hidden-xs').text("选择图片");
+</script>
+{% endblock %}

@@ -53,8 +53,31 @@ def story_detail(request, story_id: int):
 
 def add_edit_story(request, story_id):
     """添加或编辑故事"""
+    if story_id:
+        story = OurStory.objects.filter(id=story_id).first()
     if request.method == 'POST':
-        print('-------------------------')
-        print(request.POST)
+        form_data = request.POST
+        img = request.FILES
+        visible = form_data.get('visible')  # ['true']
+        story_title = form_data.get('story_title')
+        story_time = form_data.get('story_time')
+        story_img = form_data.get('story_img')
+        story_content = form_data.get('content')
+        if story_id:
+            story = OurStory.objects.get(id=story_id)
+            story.story_title = story_title
+            story.story_time = story_time
+            story.story_img = story_img
+            story.story_content = story_content
+        else:
+            story = OurStory.objects.create(story_title=story_title,
+                                            story_time=story_time,
+                                            story_img=story_img,
+                                            story_content=story_content)
+        try:
+            story.save()
+        except:
+            pass
     story_form = OurStoryForm
+    max_time = datetime.date.today()
     return render(request, 'love_record/story/story_form.html', locals())
