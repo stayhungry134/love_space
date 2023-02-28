@@ -53,31 +53,37 @@ def story_detail(request, story_id: int):
 
 def add_edit_story(request, story_id):
     """添加或编辑故事"""
+    content = "## 我们的故事"
     if story_id:
         story = OurStory.objects.filter(id=story_id).first()
+        content = story.content
+    # 如果提交方式为 POST，表示提交文案，后台保存
     if request.method == 'POST':
         form_data = request.POST
-        img = request.FILES
-        visible = form_data.get('visible')  # ['true']
+        visible = True if form_data.get('visible') == 'True' else False  # ['True']
         story_title = form_data.get('story_title')
         story_time = form_data.get('story_time')
-        story_img = form_data.get('story_img')
         story_content = form_data.get('content')
+
+        # 如果有 id，表示是编辑
         if story_id:
             story = OurStory.objects.get(id=story_id)
             story.story_title = story_title
             story.story_time = story_time
-            story.story_img = story_img
-            story.story_content = story_content
+            story.content = story_content
+        # 没有 id，表示是创建
         else:
             story = OurStory.objects.create(story_title=story_title,
                                             story_time=story_time,
-                                            story_img=story_img,
-                                            story_content=story_content)
+                                            content=story_content)
+
+        # 如果上传了图片
+        if request.FILES:
+            story.story_img = request.FILES['story-img']
         try:
             story.save()
         except:
             pass
-    story_form = OurStoryForm
+    story_form = OurStoryForm(initial={'content': content})
     max_time = datetime.date.today()
     return render(request, 'love_record/story/story_form.html', locals())
