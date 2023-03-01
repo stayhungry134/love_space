@@ -1,6 +1,6 @@
 import markdown
 import datetime
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from love_space.settings import BASE_DIR
 from love_record.models import User, OurStory, OurGallery
 from love_record.form import OurStoryForm
@@ -51,6 +51,7 @@ def story_detail(request, story_id: int):
     return render(request, 'love_record/story/story_detail.html', locals())
 
 
+# TODO 登录之后才能执行此操作
 def add_edit_story(request, story_id):
     """添加或编辑故事"""
     content = "## 我们的故事"
@@ -65,13 +66,13 @@ def add_edit_story(request, story_id):
         story_time = form_data.get('story_time')
         story_content = form_data.get('content')
 
-        # 如果有 id，表示是编辑
+        # 如果 id 不为 0，表示是编辑
         if story_id:
             story = OurStory.objects.get(id=story_id)
             story.story_title = story_title
             story.story_time = story_time
             story.content = story_content
-        # 没有 id，表示是创建
+        # id 为 0，表示是创建
         else:
             story = OurStory.objects.create(story_title=story_title,
                                             story_time=story_time,
@@ -80,10 +81,10 @@ def add_edit_story(request, story_id):
         # 如果上传了图片
         if request.FILES:
             story.story_img = request.FILES['story-img']
-        try:
-            story.save()
-        except:
-            pass
+
+        story.save()
+        return redirect('love_record:story_detail', story_id)
+
     story_form = OurStoryForm(initial={'content': content})
     max_time = datetime.date.today()
     return render(request, 'love_record/story/story_form.html', locals())

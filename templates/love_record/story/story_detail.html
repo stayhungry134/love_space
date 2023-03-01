@@ -23,8 +23,9 @@
             </ul>
         </div>
         <div class="card col-lg-8 offset-lg-1">
-            <div class="card-header text-center">
-                <h2 class="card-title">{{ story.story_title }}</h2>
+            <div class="card-header text-center story-title">
+                <h1 class="card-title">{{ story.story_title }}</h1>
+                <a class="btn btn-info float-end text-white edit-btn" href="{% url 'love_record:add_edit_story' story.id %}">编辑文章</a>
             </div>
             <div class="card-body">
                 {{ story_content|safe }}
