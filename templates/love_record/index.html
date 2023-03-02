@@ -307,17 +307,16 @@
         together_hundred: 0,
         together_years: 0,
     }
-
+    // 插入一百天的元素
     function insert_hundred(days){
         let days_hundreds = days.cloneNode(true)
         days_hundreds.removeAttribute('data-days-tens');
         days_hundreds.setAttribute('data-days-hundreds', null)
-        days_hundreds.childNodes
 
         days_hundreds.setAttribute('class', 'flip-card')
         days_hundreds.setAttribute('data-days-hundreds', null)
 
-        days.parentNode.insertBefore(days_hundreds, days_tens)
+        days.parentNode.insertBefore(days_hundreds, days)
     }
     flags = new Proxy(flags, {
             set(target, p, value, receiver) {
@@ -350,28 +349,28 @@
 
         })
     setInterval(() => {
-            const currentDate = new Date()
-            // 如果日期超过 1 年
-            let met_years = currentDate.getFullYear() - met_time.getFullYear()
-            let tmp_met_date = currentDate.setFullYear(met_time.getFullYear()) - met_time
-            if (tmp_met_date < 0){
-                currentDate.setFullYear(met_time.getFullYear() + 1)
-                met_years = met_years - 1;
-            }
-            if (met_years) flags['met_years'] = met_years
-            const between_met_time = Math.ceil((currentDate - met_time) / 1000)
-            flipAllCards('met-time', between_met_time)
-            // 如果日期超过 1 年
-            let together_years = currentDate.getFullYear() - together_time.getFullYear()
-            let tmp_together_date = currentDate.setFullYear(together_time.getFullYear()) - together_time
-            if (tmp_together_date < 0){
-                currentDate.setFullYear(together_time.getFullYear() + 1)
-                together_years = together_years - 1;
-            }
-            if (together_years) flags['together_years'] = together_years
-            const between_together_time = Math.ceil((currentDate - together_time) / 1000)
-            flipAllCards('together-time', between_together_time)
-        }, 500)
+                const currentDate = new Date()
+                // 如果日期超过 1 年
+                let met_years = currentDate.getFullYear() - met_time.getFullYear()
+                let tmp_met_date = currentDate.setFullYear(met_time.getFullYear()) - met_time
+                if (tmp_met_date < 0){
+                    currentDate.setFullYear(met_time.getFullYear() + 1)
+                    met_years = met_years - 1;
+                }
+                if (met_years) flags['met_years'] = met_years
+                const between_met_time = Math.ceil((currentDate - met_time) / 1000)
+                flipAllCards('met-time', between_met_time)
+                // 如果日期超过 1 年
+                let together_years = currentDate.getFullYear() - together_time.getFullYear()
+                let tmp_together_date = currentDate.setFullYear(together_time.getFullYear()) - together_time
+                if (tmp_together_date < 0){
+                    currentDate.setFullYear(together_time.getFullYear() + 1)
+                    together_years = together_years - 1;
+                }
+                if (together_years) flags['together_years'] = together_years
+                const between_together_time = Math.ceil((currentDate - together_time) / 1000)
+                flipAllCards('together-time', between_together_time)
+            }, 500)
 
     function flipAllCards(selector, time) {
             const seconds = time % 60
