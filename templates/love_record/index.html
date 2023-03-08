@@ -319,7 +319,7 @@
         days.parentNode.insertBefore(days_hundreds, days)
     }
     flags = new Proxy(flags, {
-            set(target, p, value, receiver) {
+            set(target, p, value) {
                 target[p] = value;
                 // 如果设置的是天数(几百天)
                 if (p === 'met_hundred' && flags[p] > 0) {
@@ -379,12 +379,12 @@
             const days = Math.floor(time / (3600 * 24))
             const hundred = Math.floor(days / 100)
             // 如果天数超过 100 天
-            if (days > 100 && selector === 'met-time' && hundred - flags['met_hundred']) {
+            if (days >= 100 && selector === 'met-time' && hundred - flags['met_hundred']) {
                 flags['met_hundred'] = hundred;
             }
 
-            if (days > 100 && selector === 'together' && hundred - flags['met_hundred']) {
-                flags['met_hundred'] = hundred;
+            if (days >= 100 && selector === 'together' && hundred - flags['met_hundred']) {
+                flags['together_hundred'] = hundred;
             }
 
 

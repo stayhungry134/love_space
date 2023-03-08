@@ -1,6 +1,6 @@
 .timing {
   width: 100%;
-  background: 50% 36px url("../images/main_photo_1.jpg") fixed;
+  background: url("../images/main_photo_1.jpg") 30% -200px/100% fixed;
   margin-top: 110px;
   padding-top: 30px;
 }

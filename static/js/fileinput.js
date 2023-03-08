@@ -3595,7 +3595,7 @@
                         }
                     }
                 } else {
-                    self.previewCache.set(content, config, tags, append);
+                    self.previewCache.set(content, config, tags);
                     self._initPreview();
                     self._initPreviewActions();
                 }
